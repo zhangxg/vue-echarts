@@ -1,9 +1,17 @@
+// FIXME-xG@230620-1533:
+/**
+ * [import/export type]
+ * https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html
+ *
+ * [an explanation](https://segmentfault.com/a/1190000039800522), but still not quite clear??
+ */
 import {
   init,
   type SetOptionOpts,
   type ECElementEvent,
   type ElementEvent
 } from "echarts/core";
+
 import type { Ref } from "vue";
 
 export type Injection<T> = T | null | Ref<T | null> | { value: T | null };
@@ -39,6 +47,12 @@ export type LoadingOptions = {
   lineWidth?: number;
   zlevel?: number;
 };
+
+// FIXME-xG@230620-1608:
+/**
+ * type-union
+ * https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types
+ */
 
 type MouseEventName =
   | "click"
@@ -93,6 +107,14 @@ type OtherEventName =
   | "brushselected"
   | "globalcursortaken";
 
+// FIXME-xG@230620-1632:
+/**
+ * 'visual' this dynamically created types? how
+ * interpretation:
+ * 1. '[key in MouseEventName]' is the property
+ * 2. '(params: ECElementEvent) => boolean;': is function signature
+ * echarts api may give some clue.
+ */
 type MouseEmits = {
   [key in MouseEventName]: (params: ECElementEvent) => boolean;
 };

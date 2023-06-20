@@ -81,6 +81,12 @@ export default defineComponent({
 
     const { autoresize, manualUpdate, loading, loadingOptions } = toRefs(props);
 
+    // FIXME-xG@230619-1800: 
+    /** 
+     * using computed to make the graph reactive. vanilla echarts also reactive, 
+     * ??  
+     */
+    // >>>>>>>>>>
     const realOption = computed(
       () => manualOption.value || props.option || null
     );
@@ -94,6 +100,7 @@ export default defineComponent({
       () => props.updateOptions || unwrapInjected(defaultUpdateOptions, {})
     );
     const nonEventAttrs = computed(() => omitOn(attrs));
+    // <<<<<<<<<<
 
     // @ts-expect-error listeners for Vue 2 compatibility
     const listeners = getCurrentInstance().proxy.$listeners;
